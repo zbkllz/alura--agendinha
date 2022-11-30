@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Agendinha</string>
+    <string name="new_student">insert new student</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="e_mail">E-mail</string>
+    <string name="submit">Submit</string>
+    <string name="delete">Delete</string>
+</resources>
