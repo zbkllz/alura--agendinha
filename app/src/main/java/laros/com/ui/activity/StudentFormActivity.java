@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import laros.com.R;
@@ -69,11 +66,6 @@ public class StudentFormActivity extends AppCompatActivity {
         emailField.setText(student.getEmail());
     }
 
-    private void configSubmitBtn() {
-        View btnSubmit = findViewById(R.id.btn_submit_form);
-        btnSubmit.setOnClickListener(v -> submitData());
-    }
-
     private void submitData() {
         fillingStudentForm();
         if (student.hasValidId()) {
@@ -98,6 +90,5 @@ public class StudentFormActivity extends AppCompatActivity {
         student.setName(name);
         student.setPhone(phone);
         student.setEmail(email);
-
     }
 }

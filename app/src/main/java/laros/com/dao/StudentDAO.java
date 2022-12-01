@@ -45,9 +45,9 @@ public class StudentDAO {
     }
 
     public void remove(Student student) {
-        Student restoredStudent = searchStudentPerId(student);
-        if (restoredStudent != null){
-            students.remove(restoredStudent);
+        Student returnedStudent = searchStudentPerId(student);
+        if (returnedStudent != null){
+            students.remove(returnedStudent);
         }
     }
 }

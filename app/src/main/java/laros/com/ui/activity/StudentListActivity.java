@@ -8,7 +8,6 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -19,12 +18,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import laros.com.R;
 import laros.com.dao.StudentDAO;
 import laros.com.model.Student;
+import laros.com.ui.adapter.StudentsListAdapter;
 
 public class StudentListActivity extends AppCompatActivity {
 
     private static final String TITLE_APPBAR = "Students List";
     private final StudentDAO dao = new StudentDAO();
-    private ArrayAdapter<Student> adapter;
+    private StudentsListAdapter adapter;
 
 
     @Override
@@ -35,7 +35,7 @@ public class StudentListActivity extends AppCompatActivity {
         fabConfigEnrollStudent();
         listConfig();
 
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             dao.save(new Student("Fulano", "1122223333", "fuleco@alura.com.br"));
             dao.save(new Student("Cicrana", "1122223333", "cricri@gmail.com"));
             dao.save(new Student("Beltrano", "1122224444", "bebel@gmail.com"));
@@ -51,7 +51,7 @@ public class StudentListActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         int itemId = item.getItemId();
-        if(itemId == R.id.activity_students_list_menu_delete) {
+        if (itemId == R.id.activity_students_list_menu_delete) {
             AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
             Student selectedStudent = adapter.getItem(menuInfo.position);
             remove(selectedStudent);
@@ -98,23 +98,9 @@ public class StudentListActivity extends AppCompatActivity {
     }
 
     private void remove(Student student) {
-//        removingAlert(student);
-//        adapter.notifyDataSetChanged();
         adapter.remove(student);
         dao.remove(student);
     }
-
-//    private void removingAlert(Student student) {
-//        new AlertDialog.Builder(this)
-//                .setTitle("Deleting")
-//                .setMessage("Are you sure?")
-//                .setPositiveButton("Aw Yeah!", (dialog, which) -> {
-//                    adapter.notifyDataSetChanged();
-//                    dao.remove(student);
-//                })
-//                .setNegativeButton("Nope!",null)
-//                .show();
-//    }
 
     private void configClickListenerPerItem(ListView studentsList) {
         studentsList.setOnItemClickListener((adapterView, view, position, id) -> {
@@ -131,11 +117,7 @@ public class StudentListActivity extends AppCompatActivity {
     }
 
     private void adapterConfig(ListView studentsList) {
-        adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1);
+        adapter = new StudentsListAdapter(this);
         studentsList.setAdapter(adapter);
     }
-
-
 }
