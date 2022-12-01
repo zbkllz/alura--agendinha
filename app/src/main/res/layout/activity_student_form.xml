@@ -1,49 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activity.StudentFormActivity"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/et_student_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="@string/name"
-        android:inputType="textCapWords"
-        android:minHeight="48dp"
-        tools:ignore="Autofill" />
+        android:orientation="vertical"
+        tools:context=".ui.activity.StudentFormActivity">
 
-    <EditText
-        android:id="@+id/et_student_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:autofillHints="(55)55555-5555"
-        android:hint="@string/phone"
-        android:inputType="phone"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/et_student_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/name"
+            android:inputType="textCapWords"
+            android:minHeight="48dp"
+            tools:ignore="Autofill" />
 
-    <EditText
-        android:id="@+id/et_student_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:autofillHints="example@mail.com"
-        android:hint="@string/e_mail"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/et_student_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:autofillHints="(55)55555-5555"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:minHeight="48dp" />
 
-<!--    <Button-->
-<!--        android:id="@+id/btn_submit_form"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="8dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:text="@string/submit"-->
-<!--        android:focusable="true"-->
-<!--        android:clickable="true"/>-->
+        <EditText
+            android:id="@+id/et_student_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:autofillHints="example@mail.com"
+            android:hint="@string/e_mail"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp" />
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -16,7 +16,7 @@ import laros.com.model.Student;
 public class StudentsListAdapter extends BaseAdapter {
 
     private final List<Student> students = new ArrayList<>();
-    private Context context;
+    private final Context context;
 
     public StudentsListAdapter(Context context) {
         this.context = context;
@@ -39,26 +39,34 @@ public class StudentsListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        View builtView = LayoutInflater
-                .from(context)
-                .inflate(R.layout.student_item, viewGroup, false);
+        View builtView = buildView(viewGroup);
         Student returnedStudent = students.get(position);
+        relate(builtView, returnedStudent);
+        return builtView;
+    }
+
+    private void relate(View builtView, Student returnedStudent) {
         TextView name = builtView.findViewById(R.id.tv_student_name);
         name.setText(returnedStudent.getName());
         TextView phone = builtView.findViewById(R.id.tv_student_phone);
         phone.setText(returnedStudent.getPhone());
-        return builtView;
     }
 
-    public void clear() {
-        students.clear();
+    private View buildView(ViewGroup viewGroup) {
+        return LayoutInflater
+                .from(context)
+                .inflate(R.layout.student_item, viewGroup, false);
     }
 
-    public void addAll(List<Student> students) {
+    public void refresh(List<Student> students){
+        this.students.clear();
         this.students.addAll(students);
+        notifyDataSetChanged();
     }
+
 
     public void remove(Student student) {
         students.remove(student);
+        notifyDataSetChanged();
     }
 }

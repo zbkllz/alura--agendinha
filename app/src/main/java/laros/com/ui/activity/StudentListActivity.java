@@ -34,12 +34,6 @@ public class StudentListActivity extends AppCompatActivity {
         setTitle(TITLE_APPBAR);
         fabConfigEnrollStudent();
         listConfig();
-
-        for (int i = 0; i < 10; i++) {
-            dao.save(new Student("Fulano", "1122223333", "fuleco@alura.com.br"));
-            dao.save(new Student("Cicrana", "1122223333", "cricri@gmail.com"));
-            dao.save(new Student("Beltrano", "1122224444", "bebel@gmail.com"));
-        }
     }
 
     @Override
@@ -77,8 +71,7 @@ public class StudentListActivity extends AppCompatActivity {
     }
 
     private void refreshStudents() {
-        adapter.clear();
-        adapter.addAll(dao.all());
+        adapter.refresh(dao.all());
     }
 
     private void listConfig() {

@@ -25,9 +25,9 @@ public class StudentDAO {
     public void edit(Student student) {
         Student studentFound = searchStudentPerId(student);
         if (studentFound != null) {
-                int studentPosition = students.indexOf(studentFound);
-                students.set(studentPosition, student);
-            }
+            int studentPosition = students.indexOf(studentFound);
+            students.set(studentPosition, student);
+        }
     }
 
     @Nullable
@@ -46,7 +46,7 @@ public class StudentDAO {
 
     public void remove(Student student) {
         Student returnedStudent = searchStudentPerId(student);
-        if (returnedStudent != null){
+        if (returnedStudent != null) {
             students.remove(returnedStudent);
         }
     }
