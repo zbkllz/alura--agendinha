@@ -8,7 +8,6 @@ import laros.com.model.Student;
 public class AgendinhaApp extends Application {
     @Override
     public void onCreate() {
-
         super.onCreate();
         createNPCForTesting();
     }

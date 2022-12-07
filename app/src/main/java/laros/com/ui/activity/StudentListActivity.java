@@ -2,6 +2,7 @@ package laros.com.ui.activity;
 
 import static laros.com.ui.activity.ConstantActivities.STUDENT_KEY;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -43,14 +44,27 @@ public class StudentListActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(final MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.activity_students_list_menu_delete) {
-            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-            Student selectedStudent = adapter.getItem(menuInfo.position);
-            remove(selectedStudent);
+            approveDeleting(item);
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void approveDeleting(final MenuItem item) {
+        new AlertDialog
+                .Builder(this)
+                .setTitle("Deleting...")
+                .setMessage("Are you sure?")
+                .setPositiveButton("DuH!", (dialog, which) -> {
+                    AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                    Student selectedStudent = adapter.getItem(menuInfo.position);
+                    remove(selectedStudent);
+                })
+                .setNegativeButton("NOPE", null)
+                .show()
+        ;
     }
 
     private void fabConfigEnrollStudent() {
@@ -78,16 +92,7 @@ public class StudentListActivity extends AppCompatActivity {
         ListView studentsList = findViewById(R.id.lv_students_list);
         adapterConfig(studentsList);
         configClickListenerPerItem(studentsList);
-        configLongClickItemListener(studentsList);
         registerForContextMenu(studentsList);
-    }
-
-    private void configLongClickItemListener(ListView studentsList) {
-        studentsList.setOnItemLongClickListener((adapterView, view, position, id) -> {
-            Student selectedStudent = (Student) adapterView.getItemAtPosition(position);
-            remove(selectedStudent);
-            return true;
-        });
     }
 
     private void remove(Student student) {
