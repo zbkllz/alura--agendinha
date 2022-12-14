@@ -26,20 +26,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:autofillHints="(55)55555-5555"
             android:hint="@string/phone"
             android:inputType="phone"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            tools:ignore="Autofill" />
 
         <EditText
             android:id="@+id/et_student_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:autofillHints="example@mail.com"
             android:hint="@string/e_mail"
             android:inputType="textEmailAddress"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            tools:ignore="Autofill" />
 
     </LinearLayout>
 </ScrollView>

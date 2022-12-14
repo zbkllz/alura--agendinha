@@ -2,13 +2,11 @@ package laros.com.ui.activity;
 
 import static laros.com.ui.activity.ConstantActivities.STUDENT_KEY;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -17,16 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import laros.com.R;
-import laros.com.dao.StudentDAO;
 import laros.com.model.Student;
-import laros.com.ui.adapter.StudentsListAdapter;
+import laros.com.ui.StudentsListView;
 
 public class StudentListActivity extends AppCompatActivity {
 
     private static final String TITLE_APPBAR = "Students List";
-    private final StudentDAO dao = new StudentDAO();
-    private StudentsListAdapter adapter;
-
+    private final StudentsListView studentsListView = new StudentsListView(this);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,24 +42,9 @@ public class StudentListActivity extends AppCompatActivity {
     public boolean onContextItemSelected(final MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.activity_students_list_menu_delete) {
-            approveDeleting(item);
+            studentsListView.approveDeleting(item);
         }
         return super.onContextItemSelected(item);
-    }
-
-    private void approveDeleting(final MenuItem item) {
-        new AlertDialog
-                .Builder(this)
-                .setTitle("Deleting...")
-                .setMessage("Are you sure?")
-                .setPositiveButton("DuH!", (dialog, which) -> {
-                    AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-                    Student selectedStudent = adapter.getItem(menuInfo.position);
-                    remove(selectedStudent);
-                })
-                .setNegativeButton("NOPE", null)
-                .show()
-        ;
     }
 
     private void fabConfigEnrollStudent() {
@@ -80,24 +60,15 @@ public class StudentListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        refreshStudents();
+        studentsListView.refreshStudents();
 
-    }
-
-    private void refreshStudents() {
-        adapter.refresh(dao.all());
     }
 
     private void listConfig() {
         ListView studentsList = findViewById(R.id.lv_students_list);
-        adapterConfig(studentsList);
+        studentsListView.adapterConfig(studentsList);
         configClickListenerPerItem(studentsList);
         registerForContextMenu(studentsList);
-    }
-
-    private void remove(Student student) {
-        adapter.remove(student);
-        dao.remove(student);
     }
 
     private void configClickListenerPerItem(ListView studentsList) {
@@ -112,10 +83,5 @@ public class StudentListActivity extends AppCompatActivity {
                 StudentFormActivity.class);
         goToStudentFormActivity.putExtra(STUDENT_KEY, student);
         startActivity(goToStudentFormActivity);
-    }
-
-    private void adapterConfig(ListView studentsList) {
-        adapter = new StudentsListAdapter(this);
-        studentsList.setAdapter(adapter);
     }
 }
